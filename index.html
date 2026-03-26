@@ -1,72 +1,429 @@
-:root {
-    --primary-color: #0f172a; /* Modernější tmavě modrá */
-    --secondary-color: #1e293b;
-    --accent-color: #fbbf24; /* Jasnější, moderní žlutá */
-    --text-light: #f8fafc;
-    --text-dark: #1e293b;
-    --font-heading: 'Montserrat', sans-serif;
-    --font-body: 'Open Sans', sans-serif;
-    --glass: rgba(15, 23, 42, 0.8);
-}
+<!DOCTYPE html>
+<html lang="cs">
 
-* {
-    margin: 0; /* Opravil jsem ti těch 10px, co tam dělalo neplechu */
-    padding: 0;
-    box-sizing: border-box;
-}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>STAVBA PRO | Moderní stavební řešení</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
-/* --- VYLEPŠENÝ HEADER --- */
-header.scrolled {
-    background: var(--glass);
-    backdrop-filter: blur(12px); /* Tohle dělá ten moderní efekt skla */
-    padding: 15px 0;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-}
+    <style>
+        /* --- DESIGN SYSTÉM 2026 --- */
+        :root {
+            --primary-color: #0f172a; 
+            --secondary-color: #1e293b;
+            --accent-color: #fbbf24; 
+            --text-light: #f8fafc;
+            --text-dark: #1e293b;
+            --font-heading: 'Montserrat', sans-serif;
+            --font-body: 'Open Sans', sans-serif;
+            --glass: rgba(15, 23, 42, 0.85);
+            --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
 
-/* --- KARTY SLUŽEB --- */
-.service-item {
-    background: white;
-    padding: 45px 35px;
-    border-radius: 20px; /* Zaoblení je základ moderního UI */
-    text-align: left; /* Zarovnání doleva vypadá u služeb profesionálněji */
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
-    border: 1px solid #f1f5f9;
-    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-}
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-.service-item:hover {
-    transform: translateY(-12px);
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
-    border-color: var(--accent-color);
-}
+        html { scroll-behavior: smooth; }
 
-/* --- PORTFOLIO --- */
-.portfolio-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: repeat(2, 300px);
-    gap: 25px;
-}
+        body {
+            font-family: var(--font-body);
+            color: var(--text-dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+            background-color: #fcfcfc;
+        }
 
-/* Uděláme první kousek portfolia větší (tzv. Bento styl) */
-.portfolio-item:first-child {
-    grid-row: span 2;
-}
+        h1, h2, h3 {
+            font-family: var(--font-heading);
+            font-weight: 800;
+            text-transform: uppercase;
+        }
 
-.portfolio-item {
-    border-radius: 24px;
-    overflow: hidden;
-}
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
 
-/* --- HERO SEKCE --- */
-#hero {
-    /* Přidal jsem jemný gradient přes overlay */
-    background: linear-gradient(135deg, rgba(15, 23, 42, 0.9) 0%, rgba(15, 23, 42, 0.4) 100%),
-                url('https://images.unsplash.com/photo-1541888946425-d81bb19240f5?q=80&w=2070') no-repeat center center/cover;
-}
+        .section-padding { padding: 100px 0; }
 
-.btn-accent {
-    border-radius: 50px; /* Kulatá tlačítka jsou teď víc in */
-    padding: 16px 40px;
-    box-shadow: 0 4px 15px rgba(252, 163, 17, 0.3);
-}
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+            font-size: 2.8rem;
+            color: var(--primary-color);
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 5px;
+            background: var(--accent-color);
+            margin: 20px auto 0;
+            border-radius: 10px;
+        }
+
+        /* --- TLAČÍTKA --- */
+        .btn {
+            display: inline-block;
+            padding: 16px 35px;
+            font-family: var(--font-heading);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+            border-radius: 50px; /* Moderní zakulacení */
+            text-decoration: none;
+        }
+
+        .btn-accent {
+            background-color: var(--accent-color);
+            color: var(--primary-color);
+            box-shadow: 0 10px 20px rgba(251, 191, 36, 0.3);
+        }
+
+        .btn-accent:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 25px rgba(251, 191, 36, 0.4);
+            background-color: #f59e0b;
+        }
+
+        /* --- HEADER (GLASSMORPHISM) --- */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 25px 0;
+            z-index: 1000;
+            transition: var(--transition);
+        }
+
+        header.scrolled {
+            background: var(--glass);
+            backdrop-filter: blur(15px);
+            padding: 15px 0;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: var(--font-heading);
+            font-size: 1.6rem;
+            font-weight: 800;
+            color: var(--text-light);
+        }
+
+        .logo span { color: var(--accent-color); }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li { margin-left: 35px; }
+
+        .nav-links a {
+            color: var(--text-light);
+            font-weight: 600;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover { color: var(--accent-color); }
+
+        /* --- HERO --- */
+        #hero {
+            height: 100vh;
+            background: linear-gradient(135deg, rgba(15, 23, 42, 0.8) 0%, rgba(15, 23, 42, 0.4) 100%),
+                        url('https://images.unsplash.com/photo-1541888946425-d81bb19240f5?q=80&w=2070') no-repeat center center/cover;
+            display: flex;
+            align-items: center;
+            text-align: center;
+            color: var(--text-light);
+        }
+
+        .hero-content h1 {
+            font-size: 4.5rem;
+            margin-bottom: 25px;
+            line-height: 1.1;
+        }
+
+        .hero-content p {
+            font-size: 1.25rem;
+            max-width: 650px;
+            margin: 0 auto 45px;
+            opacity: 0.9;
+        }
+
+        /* --- SLUŽBY (KARTY) --- */
+        #sluzby { background-color: #f8fafc; }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+        }
+
+        .service-item {
+            background: white;
+            padding: 50px 40px;
+            border-radius: 24px;
+            transition: var(--transition);
+            border: 1px solid #f1f5f9;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.02);
+        }
+
+        .service-item:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.08);
+            border-color: var(--accent-color);
+        }
+
+        .service-icon {
+            font-size: 3.5rem;
+            color: var(--accent-color);
+            margin-bottom: 30px;
+            display: inline-block;
+        }
+
+        /* --- PORTFOLIO (BENTO GRID) --- */
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            grid-auto-rows: 300px;
+            gap: 25px;
+        }
+
+        .portfolio-item:first-child { grid-row: span 2; }
+
+        .portfolio-item {
+            position: relative;
+            border-radius: 24px;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .portfolio-item img {
+            width: 100%; height: 100%;
+            object-fit: cover;
+            transition: transform 0.8s ease;
+        }
+
+        .portfolio-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(15, 23, 42, 0.9), transparent);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 40px;
+            color: white;
+            opacity: 0;
+            transition: var(--transition);
+        }
+
+        .portfolio-item:hover img { transform: scale(1.1); }
+        .portfolio-item:hover .portfolio-overlay { opacity: 1; }
+
+        /* --- STATISTIKY --- */
+        #stats-banner {
+            background: var(--primary-color);
+            color: white;
+            padding: 80px 0;
+        }
+
+        .stats-grid {
+            display: flex;
+            justify-content: space-around;
+            text-align: center;
+        }
+
+        .stat-item h4 {
+            font-size: 3.5rem;
+            color: var(--accent-color);
+            margin-bottom: 5px;
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            background: #0a0f1a;
+            color: #94a3b8;
+            padding: 80px 0 30px;
+        }
+
+        .footer-logo {
+            color: white;
+            font-size: 2rem;
+            margin-bottom: 30px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            text-align: left;
+            margin-bottom: 60px;
+        }
+
+        .contact-info i { color: var(--accent-color); margin-right: 15px; }
+
+        /* --- MOBILNÍ VERZE --- */
+        @media (max-width: 768px) {
+            .hero-content h1 { font-size: 2.8rem; }
+            .nav-links { display: none; }
+            .portfolio-grid { grid-template-columns: 1fr; grid-auto-rows: 250px; }
+            .portfolio-item:first-child { grid-row: span 1; }
+            .stats-grid { flex-direction: column; gap: 40px; }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header id="main-header">
+        <div class="container">
+            <nav>
+                <div class="logo">STAVBA<span>PRO</span>.</div>
+                <ul class="nav-links">
+                    <li><a href="#hero">Domů</a></li>
+                    <li><a href="#sluzby">Služby</a></li>
+                    <li><a href="#portfolio">Realizace</a></li>
+                    <li><a href="#kontakt">Kontakt</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section id="hero">
+        <div class="container hero-content">
+            <h1 data-aos="fade-up">Budujeme vaši<br>budoucnost</h1>
+            <p data-aos="fade-up" data-aos-delay="200">Precizní stavební činnost s důrazem na moderní materiály a ekologii.</p>
+            <a href="#kontakt" class="btn btn-accent" data-aos="zoom-in" data-aos-delay="400">Poptat projekt</a>
+        </div>
+    </section>
+
+    <section id="sluzby" class="section-padding">
+        <div class="container">
+            <h2 class="section-title" data-aos="fade-up">Co umíme nejlépe</h2>
+            <div class="services-grid">
+                <div class="service-item" data-aos="fade-up" data-aos-delay="100">
+                    <i class="fas fa-layer-group service-icon"></i>
+                    <h3>Generální dodávky</h3>
+                    <p>Od prvního výkopu až po kolaudaci. Postaráme se o vše, abyste vy mohli jen bydlet.</p>
+                </div>
+                <div class="service-item" data-aos="fade-up" data-aos-delay="200">
+                    <i class="fas fa-leaf service-icon"></i>
+                    <h3>Eko Výstavba</h3>
+                    <p>Nízkoenergetické domy, které šetří vaši peněženku i planetu. Budoucnost je v udržitelnosti.</p>
+                </div>
+                <div class="service-item" data-aos="fade-up" data-aos-delay="300">
+                    <i class="fas fa-paint-roller service-icon"></i>
+                    <h3>Designové Interiéry</h3>
+                    <p>Rekonstrukce, které mají duši. Spojujeme surové materiály s moderním komfortem.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="stats-banner">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-item" data-aos="zoom-in">
+                    <h4>15+</h4>
+                    <p>Let na trhu</p>
+                </div>
+                <div class="stat-item" data-aos="zoom-in" data-aos-delay="100">
+                    <h4>300+</h4>
+                    <p>Projektů</p>
+                </div>
+                <div class="stat-item" data-aos="zoom-in" data-aos-delay="200">
+                    <h4>12</h4>
+                    <p>Ocenění</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="portfolio" class="section-padding">
+        <div class="container">
+            <h2 class="section-title" data-aos="fade-up">Naše Realizace</h2>
+            <div class="portfolio-grid">
+                <div class="portfolio-item" data-aos="fade-up">
+                    <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=2070" alt="Vila">
+                    <div class="portfolio-overlay">
+                        <h3>Vila na kraji Prahy</h3>
+                        <p>Beton, sklo a dřevo v harmonii.</p>
+                    </div>
+                </div>
+                <div class="portfolio-item" data-aos="fade-up" data-aos-delay="100">
+                    <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=2069" alt="Office">
+                    <div class="portfolio-overlay">
+                        <h3>IT Hub Brno</h3>
+                        <p>Moderní pracovní prostředí.</p>
+                    </div>
+                </div>
+                <div class="portfolio-item" data-aos="fade-up" data-aos-delay="200">
+                    <img src="https://images.unsplash.com/photo-1613490493576-7fde63acd811?q=80&w=2071" alt="Interior">
+                    <div class="portfolio-overlay">
+                        <h3>Penthouse Loft</h3>
+                        <p>Luxusní rekonstrukce bytu.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer id="kontakt">
+        <div class="container">
+            <div class="footer-grid">
+                <div>
+                    <div class="logo footer-logo">STAVBA<span>PRO</span>.</div>
+                    <p>Stavíme s vášní pro detail a úctou k řemeslu.</p>
+                </div>
+                <div class="contact-info">
+                    <h3>Kontakt</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> Revoluční 15, Praha</p>
+                    <p><i class="fas fa-phone-alt"></i> +420 777 888 999</p>
+                    <p><i class="fas fa-envelope"></i> projekt@stavbapro.cz</p>
+                </div>
+            </div>
+            <div style="text-align: center; border-top: 1px solid #1e293b; padding-top: 30px; font-size: 0.8rem;">
+                &copy; 2026 STAVBA PRO s.r.o. | Všechna práva vyhrazena.
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        // AOS Inicializace
+        AOS.init({ duration: 1000, once: true, offset: 150 });
+
+        // Sticky Header Script
+        const header = document.getElementById('main-header');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 80) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+    </script>
+</body>
+</html>
